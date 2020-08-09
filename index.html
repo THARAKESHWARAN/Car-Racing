@@ -1,26 +1,40 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Zen</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.dom.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.sound.min.js"></script>
-    <script src="p5.play.js"></script>
 
-    <script src="https://www.gstatic.com/firebasejs/6.3.4/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/6.3.0/firebase-database.js"></script>
+<head>
+  <meta charset="utf-8">
+  <title>Car racing</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.dom.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.sound.min.js"></script>
+  <script src="p5.play.js"></script>
 
+  <script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-database.js"></script>
 
     <script>
       // Your web app's Firebase configuration
-      //add here
+      var firebaseConfig = {
+        apiKey: "AIzaSyCvirGrHN2WRzC2j8n8TRU3JuH778j-PYo",
+        authDomain: "car-racing-76d15.firebaseapp.com",
+        databaseURL: "https://car-racing-76d15.firebaseio.com",
+        projectId: "car-racing-76d15",
+        storageBucket: "car-racing-76d15.appspot.com",
+        messagingSenderId: "1064156522363",
+        appId: "1:1064156522363:web:2a16e2f706989b1f79ffde"
+      };
       // Initialize Firebase
       firebase.initializeApp(firebaseConfig);
     </script>
-    <link rel="stylesheet" type="text/css" href="style.css"/>
-  </head>
-  <body>
-    <script src="sketch.js"></script>
-  </body>
+
+    <link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+
+<body>
+  <script src="sketch.js"></script>
+  <script src="js/game.js"></script>
+  <script src="js/player.js"></script>
+  <script src="js/form.js"></script>
+</body>
+
 </html>
