@@ -4,6 +4,7 @@ class Form {
             this.button = createButton("Next");
             this.greeting = createElement("h3");
             this.wait = createElement("h4");
+            this.resetButton = createButton("Reset");
         }
 
         display() {
@@ -14,11 +15,12 @@ class Form {
             this.input.position(windowWidth/2-100, windowHeight/2-100);
  
             this.button.position(windowWidth/2-50, windowHeight/2-60);
+
+            this.resetButton.position(windowWidth-320, windowHeight-650);
  
             this.greeting.position(windowWidth/2-80, windowHeight/2);
 
-
-            this.button.mousePressed(()=> {
+             this.waitState = ()=> {
                 this.input.hide();
                 this.button.hide();
                 this.wait.html("Wait For Other Players!");
@@ -33,6 +35,15 @@ class Form {
                 player.update();
                 player.updateCount(playerCount);
                 this.greeting.html("Hi  "+ player.name);
+            }
+
+            this.button.mousePressed(this.waitState);
+
+
+            this.resetButton.mousePressed(()=>{
+                player.updateCount(0);
+                game.updateState(0);
+                window.location.reload();
             })
         }
 

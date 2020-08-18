@@ -5,12 +5,12 @@ class Game {
     }
 
     getState() {
-       var gameStateRef = database.ref("gameState");
-       gameStateRef.on("value", function (data) {
-           gameState = data.val();
-       }, function (error) {
-           console.log(error);
-       })
+        var gameStateRef = database.ref("gameState");
+        gameStateRef.on("value", function (data) {
+            gameState = data.val();
+        }, function (error) {
+            console.log(error);
+        })
     }
 
     updateState(state) {
@@ -20,22 +20,22 @@ class Game {
     }
 
     async start() {
-        if(gameState === 0) {
+        if (gameState === 0) {
             player = new Player();
             var playerCountRef = await database.ref("playerCount").once("value");
-            if(playerCountRef.exists()){
+            if (playerCountRef.exists()) {
                 playerCount = playerCountRef.val();
                 player.getCount();
             }
             form = new Form();
-            form.display(); 
-            car1 = createSprite(windowWidth/2-350, windowHeight/2+100);
+            form.display();
+            car1 = createSprite(windowWidth / 2 - 350, windowHeight / 2 + 100);
             car1.addImage("car1", car1Img);
-            car2 = createSprite(windowWidth/2-100, windowHeight/2+100);
+            car2 = createSprite(windowWidth / 2 - 100, windowHeight / 2 + 100);
             car2.addImage("car2", car2Img);
-            car3 = createSprite(windowWidth/2+50, windowHeight/2+100);
+            car3 = createSprite(windowWidth / 2 + 50, windowHeight / 2 + 100);
             car3.addImage("car3", car3Img);
-            car4 = createSprite(windowWidth/2+250, windowHeight/2+100);
+            car4 = createSprite(windowWidth / 2 + 250, windowHeight / 2 + 100);
             car4.addImage("car4", car4Img)
             cars = [car1, car2, car3, car4];
         }
@@ -47,38 +47,43 @@ class Game {
         // message.html("GAME STARTED");
         // message.position(width +100, 250);
         Player.getPlayerInfo();
-        if(allPlayers !== undefined){
-           var yPosition = windowHeight/2+100;
-           var index = 0;
-           background(groundImg);
-           image(trackImg, 0 , -windowHeight*4, windowWidth, windowHeight*5);
-            for(var i in allPlayers){
-                cars[index].y = yPosition-allPlayers[i].Distance;
-                if(index+1 === player.index){
-                    cars[index].shapeColor = "red";
+        if (allPlayers !== undefined) {
+            var yPosition = windowHeight / 2 + 100;
+            var index = 0;
+            background(groundImg);
+            image(trackImg, 0, -windowHeight * 4, windowWidth, windowHeight * 5);
+            for (var i in allPlayers) {
+                cars[index].y = yPosition - allPlayers[i].Distance;
+                if (index + 1 === player.index) {
+                    push();
+                    fill("red");
+                    ellipse(cars[index].x, cars[index].y, 120, 20);
+                    pop();
                     camera.position.y = cars[index].y;
                 }
-                camera.position.x = windowWidth/2;
-                index = index+1;
+                camera.position.x = windowWidth / 2;
+                index = index + 1;
             }
         }
-        if(keyDown(UP_ARROW)){
+        if (keyDown(UP_ARROW)) {
             player.distance = player.distance + 50;
             player.update();
         }
-        
-        if(keyDown(DOWN_ARROW)){
+
+        if (keyDown(DOWN_ARROW)) {
             player.distance = player.distance - 50;
             player.update();
         }
         drawSprites();
 
-        if(player.distance > 3500) {
+        if (player.distance > 3500) {
             gameState = 2;
         }
     }
 
     end() {
-        text("Game Over!", windowWidth/2, player.distance - 100);
+        if (messageWritten === 0) {
+            text("Game Over!", windowWidth / 2, windowHeight - player.distance - 100);
+        }
     }
 }

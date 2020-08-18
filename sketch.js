@@ -6,6 +6,8 @@ var car1Img, car2Img;
 var car3Img, car4Img;
 var groundImg, trackImg;
 
+var messageWritten = 0;
+
 function preload() {
   car1Img = loadImage("images/car1.png")
   car2Img = loadImage("images/car2.png")
@@ -37,8 +39,6 @@ function draw() {
     game.updateState(1);
   }
 
-  console.log(gameState);
-
   if(gameState === 1){
     clear();
     game.play();
@@ -47,4 +47,10 @@ function draw() {
   if(gameState === 2){
     game.end();
   }
+}
+
+function keyPressed(){
+      if(keyCode === 13){
+        form.waitState();
+      }          
 }
