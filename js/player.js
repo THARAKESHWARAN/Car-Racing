@@ -4,6 +4,7 @@ class Player {
         this.name = null;
         this.distance = 0;
         this.index = null;
+        this.rank = 0;
     }
 
     getCount() {
@@ -13,16 +14,30 @@ class Player {
         }, function (error) {
             console.log(error);
         })
-     }
+    }
 
-     updateCount(count) {
+    getRank() {
+        var endStateRef = database.ref("end");
+        endStateRef.on("value", (data) => {
+            this.rank = data.val();
+        })
+    }
+
+    static updateRank(x) {
+        database.ref("/").update({
+            end: x
+        })
+    }
+
+
+    updateCount(count) {
         database.ref("/").update({
             playerCount: count
         })
     }
 
     update() {
-        database.ref("players/player"+this.index).set({
+        database.ref("players/player" + this.index).set({
             Name: this.name,
             Distance: this.distance
         })
@@ -33,6 +48,6 @@ class Player {
             allPlayers = data.val();
         }, (error) => {
             console.log(error);
-        }) 
+        })
     }
 }

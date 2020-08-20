@@ -1,5 +1,7 @@
 var database, gameState, playerCount, game, form, player, allPlayers;
 
+var alertHappened = false;
+
 var cars, car1, car2, car3, car4;
 
 var car1Img, car2Img;
@@ -20,37 +22,37 @@ function preload() {
 
 function setup() {
 
-  createCanvas(windowWidth-300, windowHeight-200);
+  createCanvas(windowWidth - 300, windowHeight - 200);
 
   gameState = 0;
 
-  database=firebase.database();
+  database = firebase.database();
 
   game = new Game();
 
   game.getState();
-  
+
   game.start();
 
 }
 
 function draw() {
-  if(playerCount === 4 && gameState === 0){
+  if (playerCount === 4 && gameState === 0) {
     game.updateState(1);
   }
 
-  if(gameState === 1){
+  if (gameState === 1) {
     clear();
     game.play();
   }
 
-  if(gameState === 2){
+  if (gameState === 2) {
     game.end();
   }
 }
 
-function keyPressed(){
-      if(keyCode === 13){
-        form.waitState();
-      }          
+function keyPressed() {
+  if (keyCode === 13) {
+    form.waitState();
+  }
 }

@@ -1,9 +1,9 @@
 class Form {
         constructor() {
-            this.input = createInput("Your Name");
             this.button = createButton("Next");
             this.greeting = createElement("h3");
             this.wait = createElement("h4");
+            this.input = createInput("Your Name");
             this.resetButton = createButton("Reset");
         }
 
@@ -39,10 +39,10 @@ class Form {
 
             this.button.mousePressed(this.waitState);
 
-
             this.resetButton.mousePressed(()=>{
                 player.updateCount(0);
                 game.updateState(0);
+                Player.updateRank(0);
                 window.location.reload();
             })
         }
@@ -50,5 +50,13 @@ class Form {
         hide() {
             this.greeting.hide();
             this.wait.hide();
+        }
+
+        input() {
+            this.input = document.createElement("input");
+            this.input.placeholder = "Your Name"; 
+            this.input.style.position = "absolute";
+            this.input.style.top = "200px";
+            this.input.style.left = "300px";
         }
 }

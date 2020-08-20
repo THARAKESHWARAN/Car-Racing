@@ -1,3 +1,5 @@
+var playerRank;
+
 class Game {
 
     constructor() {
@@ -47,6 +49,7 @@ class Game {
         // message.html("GAME STARTED");
         // message.position(width +100, 250);
         Player.getPlayerInfo();
+        player.getRank();
         if (allPlayers !== undefined) {
             var yPosition = windowHeight / 2 + 100;
             var index = 0;
@@ -78,12 +81,16 @@ class Game {
 
         if (player.distance > 3500) {
             gameState = 2;
+            player.rank++;
+            playerRank = player.rank;
+            Player.updateRank(player.rank);
         }
     }
 
     end() {
-        if (messageWritten === 0) {
-            text("Game Over!", windowWidth / 2, windowHeight - player.distance - 100);
+        if (alertHappened === false) {
+            alert("Your Rank: " + playerRank);
+            alertHappened = true;
         }
     }
 }
